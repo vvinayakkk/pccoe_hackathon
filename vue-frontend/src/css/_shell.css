@@ -1,0 +1,112 @@
+.shell {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  max-height: calc(100% - 4em);
+  background: var(--surfacePrimary);
+  color: var(--textPrimary);
+  z-index: 9999;
+  background: var(--dividerSecondary);
+  transition: background 0.3s ease, transform 0.3s ease;
+  cursor: ns-resize;
+  touch-action: none;
+  user-select: none;
+  width: 100%;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.shell__divider {
+  background: rgba(127, 127, 127, 0.3);
+  width: 100%;
+  height: 8px;
+  cursor: ns-resize;
+  transition: background 0.3s ease;
+}
+
+.shell__divider:hover {
+  background: rgba(127, 127, 127, 0.9);
+}
+
+.shell__content {
+  height: 100%;
+  font-family: monospace;
+  overflow: auto;
+  font-size: 1rem;
+  cursor: text;
+  box-shadow: 0 0 5px var(--borderPrimary);
+  transition: transform 0.3s ease;
+  padding: 1em;
+}
+
+.shell__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  background-color: var(--dividerPrimary);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+body.rtl .shell-content {
+  direction: ltr;
+}
+
+.shell__result {
+  display: flex;
+  padding: 0.5em;
+  align-items: flex-start;
+  border-top: 1px solid var(--divider);
+  transition: background-color 0.3s ease;
+}
+
+.shell__result:hover {
+  background-color: var(--surfaceSecondary);
+}
+
+.shell--hidden {
+  transform: translateY(105%);
+  transition: transform 0.3s ease;
+}
+
+.shell__result--hidden {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shell__text,
+.shell__prompt,
+.shell__prompt i {
+  font-size: inherit;
+}
+
+.shell__prompt {
+  width: 1.2rem;
+}
+
+.shell__prompt i {
+  color: var(--blue);
+}
+
+.shell__text {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  width: 100%;
+  color: var(--textSecondary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.shell__content {
+  animation: fadeIn 0.3s ease-in-out;
+}

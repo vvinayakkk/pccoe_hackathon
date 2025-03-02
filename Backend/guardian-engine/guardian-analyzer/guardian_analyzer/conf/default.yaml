@@ -1,0 +1,104 @@
+# nlp_engine_name: spacy
+# models:
+#   -
+#     lang_code: en
+#     model_name: en_core_web_lg
+#   -
+#     lang_code: hi
+#     model_name: xx_sent_ud_sm
+#   -
+#     lang_code: ka
+#     model_name: xx_sent_ud_sm
+
+# nlp_engine_name: stanza
+# models:
+#   -
+#     lang_code: en
+#     model_name: en
+#   -
+#     lang_code: hi
+#     model_name: hi
+
+nlp_engine_name: transformers
+models:
+  -
+    lang_code: en
+    model_name:
+      spacy: en_core_web_sm
+      transformers: StanfordAIMI/stanford-deidentifier-base
+  -
+    lang_code: hi
+    model_name:
+      spacy: xx_ent_wiki_sm
+      transformers: mirfan899/hindi-bert-ner
+
+
+# nlp_engine_name: stanza
+# models:
+#   -
+#     lang_code: en
+#     model_name: en
+#   -
+#     lang_code: hi
+#     model_name: hi
+
+# nlp_engine_name: transformers
+# models:
+#   -
+#     lang_code: hi
+#     model_name:
+#       spacy: xx_ent_wiki_sm
+#       transformers: mirfan899/hindi-bert-ner
+
+
+ner_model_configuration:
+  aggregation_strategy: max
+  stride: 16
+  alignment_mode: expand
+  model_to_presidio_entity_mapping:
+    PER: PERSON
+    PERSON: PERSON
+    NORP: NRP
+    FAC: LOCATION
+    LOC: LOCATION
+    GPE: LOCATION
+    LOCATION: LOCATION
+    ORG: ORGANIZATION
+    ORGANIZATION: ORGANIZATION
+    DATE: DATE_TIME
+    TIME: DATE_TIME
+    AGE: AGE
+    ID: ID
+    EMAIL: EMAIL
+    PATIENT: PERSON
+    STAFF: PERSON
+    HOSP: ORGANIZATION
+    PATORG: ORGANIZATION
+    PHONE: PHONE_NUMBER
+    HCW: PERSON
+    HOSPITAL: LOCATION
+    FACILITY: LOCATION
+    VENDOR: ORGANIZATION
+    NUMBER: NUMBER
+
+  low_confidence_score_multiplier: 0.4
+  low_score_entity_names:
+  - ID
+  labels_to_ignore:
+  - O
+  - MEASURE
+  - BRAND
+  - TERMS
+  - TITLE_OBJECT
+  - ORGANIZATION # Has many false positives
+  - VENDOR
+  - CARDINAL
+  - EVENT
+  - LANGUAGE
+  - LAW
+  - MONEY
+  - ORDINAL
+  - PERCENT
+  - PRODUCT
+  - QUANTITY
+  - WORK_OF_ART

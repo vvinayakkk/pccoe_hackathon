@@ -1,0 +1,53 @@
+:root {
+  color-scheme: light;
+  
+  /* Base colors */
+  --background-color: #ffffff;
+  --text-color: #333333;
+  
+  /* Surface colors */
+  --surface-a: #ffffff;
+  --surface-b: #f8f9fa;
+  --surface-c: #e9ecef;
+  --surface-d: #dee2e6;
+  
+  /* Component colors */
+  --primary-color: #3B82F6;
+  --primary-dark: #2563eb;
+  --primary-light: #60a5fa;
+  
+  /* Other variables */
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --credits-text: #718096;
+}
+
+:root.dark {
+  color-scheme: dark;
+  
+  /* Base colors */
+  --background-color: #121212;
+  --text-color: #ffffff;
+  
+  /* Surface colors */
+  --surface-a: #1a1a1a;
+  --surface-b: #2d2d2d;
+  --surface-c: #404040;
+  --surface-d: #555555;
+  
+  /* Component colors */
+  --primary-color: #60a5fa;
+  --primary-dark: #3b82f6;
+  --primary-light: #93c5fd;
+  
+  /* Other variables */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --credits-text: #a0aec0;
+}
+
+/* Apply theme to body */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}

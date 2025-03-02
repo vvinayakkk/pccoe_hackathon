@@ -1,0 +1,125 @@
+.share {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 1em;
+}
+
+@media (max-width: 736px) {
+  .share {
+    display: block;
+  }
+}
+
+.share__box {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  background: var(--surfacePrimary);
+  color: var(--textPrimary);
+  border-radius: 0.5em;
+  margin: 1em;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.share__box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.share__box__header {
+  padding: 1.5em;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  background: var(--surfaceSecondary);
+  border-bottom: 1px solid var(--borderPrimary);
+}
+
+.share__box__icon i {
+  font-size: 5em;
+  color: #40c4ff;
+  transition: color 0.3s ease;
+}
+
+.share__box__icon i:hover {
+  color: #00b0ff;
+}
+
+.share__box__center {
+  text-align: center;
+  padding: 1em;
+}
+
+.share__box__info {
+  flex: 1 1 18em;
+  padding: 1em;
+}
+
+.share__box__element {
+  padding: 1em;
+  border-top: 1px solid var(--borderPrimary);
+  word-break: break-all;
+  transition: background-color 0.3s ease;
+}
+
+.share__box__element:hover {
+  background-color: var(--surfaceSecondary);
+}
+
+.share__box__element .button {
+  display: inline-block;
+  margin-top: 0.5em;
+}
+
+.share__box__element .button i {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.share__box__items {
+  text-align: left;
+  flex: 10 0 25em;
+  padding: 1em;
+}
+
+.share__box__items #listing.list .item {
+  cursor: pointer;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-top: 1px solid var(--borderPrimary);
+  transition: background-color 0.3s ease;
+}
+
+#listing.list .item:hover {
+  background-color: var(--surfaceSecondary);
+}
+
+#listing.list .item .name {
+  width: 50%;
+}
+
+#listing.list .item .modified {
+  width: 25%;
+}
+
+.share__wrong__password {
+  background: var(--red);
+  color: #fff;
+  padding: 0.5em;
+  text-align: center;
+  animation: fadeIn 0.2s forwards;
+  border-radius: 0.25em;
+  margin-top: 1em;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

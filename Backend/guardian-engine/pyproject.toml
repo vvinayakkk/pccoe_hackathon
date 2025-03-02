@@ -1,0 +1,115 @@
+[tool.ruff]
+
+exclude = [
+    # Ruff recommended:
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+
+    # Project specific:
+    "docs/samples",
+    "e2e-tests/",
+    "*/tests/*"
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "D", "N", "W",
+        # To be added:
+        # "SIM", "UP", "ANN", "B"
+]
+ignore = ["E203", "D100", "D202", "D407", "ANN101", "ANN102", "ANN204"]
+
+fixable = ["ALL"]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.poetry]
+name = "data-rakshak"
+version = "0.1.0"
+description = "Indian Data Rakshak - a Presidio based indian redaction system"
+authors = ["Spam Me <spammenauf@gmail.com>"]
+packages = [
+    { include = "presidio_image_redactor", from = "presidio-image-redactor" },
+    { include = "presidio_analyzer", from = "presidio-analyzer" },
+    { include = "presidio_anonymizer", from = "presidio-anonymizer" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+flask = ">=1.1"
+
+# Presidio Analyzer dependencies
+spacy = ">=3.4.4, <4.0.0"
+regex = "*"
+tldextract = "*"
+pyyaml = "*"
+phonenumbers = ">=8.12,<9.0.0"
+
+# Presidio Anonymizer dependencies
+pycryptodome = ">=3.10.1"
+
+# Presidio Image Redactor dependencies
+pillow = ">=9.0"
+pytesseract = ">=0.3.7,<0.4"
+matplotlib = ">=3.6"
+pydicom = ">=2.3.0"
+pypng = ">=0.20220715.0"
+azure-ai-formrecognizer = ">=3.3.0,<4.0.0"
+opencv-python-headless = ">=4.0.0,<5.0.0"
+python-gdcm = ">=3.0.24.1"
+
+[tool.poetry.group.dev.dependencies]
+pip = "*"
+ruff = "*"
+pytest = "*"
+pytest-mock = "*"
+python-dotenv = "*"
+pre_commit = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

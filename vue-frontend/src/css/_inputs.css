@@ -1,0 +1,59 @@
+.input {
+  background: var(--surfacePrimary);
+  color: var(--textPrimary);
+  border: 1px solid var(--borderPrimary);
+  border-radius: 0.25em;
+  padding: 0.75em 1em;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input:hover,
+.input:focus {
+  border-color: var(--borderSecondary);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input--block {
+  margin-bottom: 1em;
+  display: block;
+  width: 100%;
+}
+
+.input--textarea {
+  line-height: 1.5;
+  font-family: monospace;
+  min-height: 10em;
+  resize: vertical;
+}
+
+.input--red {
+  background: var(--input-red) !important;
+  color: var(--textOnRed) !important;
+}
+
+.input--green {
+  background: var(--input-green) !important;
+  color: var(--textOnGreen) !important;
+}
+
+.input--error {
+  border-color: var(--error);
+}
+
+.input--success {
+  border-color: var(--success);
+}
+
+.input--disabled {
+  background: var(--disabledBackground);
+  color: var(--disabledText);
+  cursor: not-allowed;
+  opacity: 0.6;
+}

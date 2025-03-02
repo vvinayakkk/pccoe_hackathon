@@ -1,0 +1,1159 @@
+@import "normalize.css/normalize.css";
+@import "vue-toastification/dist/index.css";
+@import "vue-final-modal/style.css";
+@import "./_variables.css";
+@import "./_buttons.css";
+@import "./_inputs.css";
+@import "./_shell.css";
+@import "./_share.css";
+@import "./fonts.css";
+@import "./base.css";
+@import "./header.css";
+@import "./listing.css";
+@import "./listing-icons.css";
+@import "./upload-files.css";
+@import "./dashboard.css";
+@import "./login.css";
+@import "./mobile.css";
+@import "./epubReader.css";
+@import "./mdPreview.css";
+
+/* For testing only
+ :focus {
+  outline: 2px solid crimson !important;
+  border-radius: 3px !important;
+} */
+
+.link {
+  color: var(--blue);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.link:hover {
+  color: var(--dark-blue);
+  transform: scale(1.05);
+}
+
+#loading {
+  background: var(--background);
+}
+#loading .spinner > div {
+  background: var(--iconPrimary);
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+main .spinner {
+  display: block;
+  text-align: center;
+  line-height: 0;
+  padding: 1em 0;
+}
+
+main .spinner > div {
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0 0.1em;
+  font-size: 1em;
+  background: var(--iconPrimary);
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+main .spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+main .spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+.delayed {
+  animation: delayed linear 100ms;
+}
+
+@keyframes delayed {
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* * * * * * * * * * * * * * * *
+ *            ACTION           *
+ * * * * * * * * * * * * * * * */
+
+.action {
+  display: inline-block;
+  cursor: pointer;
+  transition: 0.3s ease all;
+  border: 0;
+  margin: 0;
+  color: var(--action);
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+  vertical-align: middle;
+  text-align: left;
+  position: relative;
+}
+
+.action.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.action i {
+  padding: 0.4em;
+  transition: 0.1s ease-in-out all;
+  border-radius: 50%;
+}
+
+.action:hover {
+  background-color: var(--hover);
+  transform: scale(1.15);
+}
+
+.action ul {
+  position: absolute;
+  top: 0;
+  color: #7d7d7d;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  display: flex;
+}
+
+.action ul li {
+  line-height: 1;
+  padding: 0.7em;
+  transition: 0.3s ease background-color, 0.3s ease transform;
+}
+
+.action ul li:hover {
+  background-color: var(--divider);
+  transform: translateX(10px);
+  transition: transform 0.2s ease;
+}
+
+#click-overlay {
+  display: none;
+  position: fixed;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+#click-overlay.active {
+  visibility: visible;
+}
+
+.action .counter {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--blue);
+  color: var(--iconSecondary);
+  border-radius: 50%;
+  font-size: 0.75em;
+  width: 1.8em;
+  height: 1.8em;
+  text-align: center;
+  line-height: 1.55em;
+  font-weight: bold;
+  border: 2px solid var(--borderPrimary);
+}
+
+/* PREVIEWER */
+
+#previewer {
+  background-color: rgba(0, 0, 0, 0.99);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+#previewer header {
+  background: none;
+  color: #fff;
+  border-bottom: 0px;
+  box-shadow: 0px 0px 0px;
+  z-index: 19999;
+}
+
+#previewer header > .action i {
+  color: #fff;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+#previewer header > title {
+  white-space: nowrap;
+  text-shadow: 1px 1px 1px #000000;
+}
+
+@media (min-width: 738px) {
+  #previewer header #dropdown .action i {
+    color: #fff;
+    text-shadow: 1px 1px 1px #000000;
+  }
+}
+
+#previewer header .action:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.15);
+}
+
+#previewer header .action span {
+  display: none;
+}
+
+#previewer .preview {
+  text-align: center;
+  height: 100%;
+}
+
+#previewer .preview pre {
+  text-align: left;
+  overflow: auto;
+}
+
+#previewer .preview pre,
+#previewer .preview video,
+#previewer .preview img {
+  max-height: 100%;
+  margin: 0;
+}
+
+#previewer .preview audio {
+  width: 95%;
+  height: 88%;
+}
+
+#previewer .preview video {
+  height: 100%;
+}
+
+#previewer .vjs-error-display {
+  margin-top: 40%;
+}
+
+#previewer .preview .info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  color: #fff;
+}
+#previewer .preview .info .title {
+  margin-bottom: 1em;
+}
+#previewer .preview .info .title i {
+  display: block;
+  margin-bottom: 0.1em;
+  font-size: 4em;
+}
+#previewer .preview .info .button {
+  display: inline-block;
+}
+#previewer .preview .info .button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+#previewer .preview .info .button i {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.3em;
+}
+
+#previewer .pdf {
+  width: 100%;
+  height: 100%;
+  padding-top: 4em;
+}
+
+#previewer h2.message {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#previewer > button {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(80, 80, 80, 0.5);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s ease all;
+}
+
+#previewer > button.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#previewer > button:hover {
+  background-color: rgba(80, 80, 80, 0.7);
+  transform: scale(1.15);
+}
+
+#previewer > button > i {
+  padding: 0.4em;
+}
+
+#previewer > button:first-of-type {
+  left: 0.5em;
+}
+
+#previewer > button:last-of-type {
+  right: 0.5em;
+}
+
+#previewer .spinner {
+  text-align: center;
+  position: fixed;
+  top: calc(50% + 1.85em);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#previewer .spinner > div {
+  width: 18px;
+  height: 18px;
+  background: var(--iconPrimary);
+}
+
+/* EDITOR */
+
+#editor-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  position: fixed;
+  padding-top: 4em;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+#editor-container .bar {
+  background: var(--surfacePrimary);
+}
+
+#editor-container #editor {
+  flex: 1;
+}
+
+#editor-container .breadcrumbs {
+  height: 2.3em;
+  padding: 0 1em;
+}
+
+/*** RTL - flip and position arrow of path ***/
+html[dir="rtl"] .breadcrumbs .chevron {
+  transform: scaleX(-1) translateX(16em);
+}
+
+#editor-container .breadcrumbs span {
+  font-size: 0.75rem;
+}
+
+#editor-container .breadcrumbs i {
+  font-size: 1rem;
+}
+
+/* * * * * * * * * * * * * * * *
+ *            FOOTER           *
+ * * * * * * * * * * * * * * * */
+
+.credits {
+  font-size: 0.6em;
+  margin: 3em 2.5em;
+  color: #a5a5a5;
+}
+
+.credits > span {
+  display: block;
+  margin: 0.3em 0;
+}
+
+.credits a,
+.credits a:hover {
+  color: inherit;
+  cursor: pointer;
+}
+
+/* * * * * * * * * * * * * * * *
+ *          ANIMATIONS         *
+ * * * * * * * * * * * * * * * */
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* * * * * * * * * * * * * * * *
+ *         SETTINGS TUS        *
+ * * * * * * * * * * * * * * * */
+
+.tusConditionalSettings input:disabled {
+  background-color: #ddd;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* * * * * * * * * * * * * * * *
+ *         SETTINGS RULES      *
+ * * * * * * * * * * * * * * * */
+
+.rules > div {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.rules input[type="checkbox"] {
+  margin-right: 0.2rem;
+}
+
+.rules input[type="text"] {
+  border: 1px solid#ddd;
+  padding: 0.2rem;
+}
+
+.rules label {
+  margin-right: 0.5rem;
+}
+
+.rules button {
+  margin-left: auto;
+}
+
+.rules button.delete {
+  padding: 0.2rem 0.5rem;
+  margin-left: 0.5rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.rules button.delete:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+/* * * * * * * * * * * * * * * *
+ *         RTL overrides       *
+ * * * * * * * * * * * * * * * */
+
+html[dir="rtl"] .card-content textarea {
+  direction: ltr;
+  text-align: left;
+}
+
+html[dir="rtl"] .card-content .small + input {
+  direction: ltr;
+  text-align: left;
+}
+
+html[dir="rtl"] .card.floating .card-content .file-list {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Add these to ensure proper theme transition */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* PrimeVue component overrides */
+.p-component {
+  color: var(--text-color) !important;
+  background-color: var(--surface-a) !important;
+}
+
+.p-button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.p-button.p-button-text {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+}
+
+/* Add more component-specific overrides as needed */
+
+/* PrimeVue DataTable dark mode overrides */
+.p-datatable {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+}
+
+.p-datatable .p-datatable-header,
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td,
+.p-datatable .p-datatable-footer {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: var(--surface-c) !important;
+}
+
+/* PrimeVue TabView dark mode overrides */
+.p-tabview .p-tabview-nav {
+  background-color: var(--surface-b) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: var(--surface-a) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.p-tabview .p-tabview-panels {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background-color: var(--surface-c) !important;
+  color: var(--text-color) !important;
+}
+
+/* Card styles for dark mode */
+.card {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.stat-card {
+  background-color: var(--surface-b) !important;
+}
+
+/* TabView and content specific overrides */
+.p-tabview {
+  background-color: var(--surface-a) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-tabview .p-tabview-nav {
+  border-width: 0 0 2px 0 !important;
+}
+
+.p-tabview .p-tabview-nav li {
+  margin-right: 4px !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+  padding: 1rem 1.5rem !important;
+  font-weight: 500 !important;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: var(--surface-a) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  border-width: 0 0 2px 0 !important;
+}
+
+.p-tabview-panels {
+  padding: 1.5rem 0 !important;
+  background-color: var(--surface-a) !important;
+}
+
+/* Tab content area */
+.p-tabview-panel {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+}
+
+/* File upload area in tabs */
+.p-fileupload {
+  background-color: var(--surface-b) !important;
+  border-color: var(--border-color) !important;
+}
+
+.p-fileupload-content {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+}
+
+/* Text input areas in tabs */
+.p-inputtext, 
+.p-textarea {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Ensure all text within tabs is visible */
+.tab-content * {
+  color: var(--text-color) !important;
+}
+
+/* Remove any conflicting backgrounds */
+.p-tabview-panel > div {
+  background-color: transparent !important;
+}
+
+/* Override theme for regular buttons */
+.p-button {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* Fixed styles for blue buttons (settings page) */
+.p-button.p-button-primary {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.p-button.p-button-primary:hover {
+  background-color: #4338ca !important;
+}
+
+.p-button.p-button-primary:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(79, 70, 229, 0.5) !important;
+}
+
+/* Text buttons */
+.p-button.p-button-text {
+  background-color: transparent !important;
+  color: var(--text-color) !important;
+}
+
+.p-button.p-button-text.p-button-primary {
+  color: #4f46e5 !important;
+}
+
+.p-button.p-button-text.p-button-primary:hover {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+}
+
+/* Settings page button styles */
+.card .button,
+.card .p-button,
+.card input[type="submit"] {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  transition: background-color 0.3s ease !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.card .button:hover,
+.card .p-button:hover,
+.card input[type="submit"]:hover {
+  background-color: #4338ca !important;
+}
+
+/* Special handling for delete/cancel buttons */
+.card .button.button--red {
+  background-color: #ef4444 !important;
+}
+
+.card .button.button--red:hover {
+  background-color: #dc2626 !important;
+}
+
+.card .button.button--grey {
+  background-color: #6b7280 !important;
+}
+
+.card .button.button--grey:hover {
+  background-color: #4b5563 !important;
+}
+
+/* Override any theme-based button colors in settings */
+.card .button--flat {
+  background-color: #4f46e5 !important;
+  color: white !important;
+}
+
+/* Focus states */
+.card .button:focus,
+.card .p-button:focus,
+.card input[type="submit"]:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(79, 70, 229, 0.5) !important;
+}
+
+/* Redaction tab button styles */
+.redaction-tabs-container .p-button,
+.redaction-tabs-container .button {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.redaction-tabs-container .p-button:hover,
+.redaction-tabs-container .button:hover {
+  background-color: #4338ca !important;
+}
+
+/* Style for the upload/redact buttons */
+.p-fileupload-choose,
+.p-fileupload-upload,
+Button[label="Redact Text"] {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.375rem !important;
+  margin-left: 1rem !important;
+  margin-right: 1rem !important;
+}
+
+.p-fileupload-choose:hover,
+.p-fileupload-upload:hover,
+Button[label="Redact Text"]:hover {
+  background-color: #4338ca !important;
+}
+
+/* Download button style */
+.redaction-tabs-container .p-button-rounded.p-button-text {
+  color: #4f46e5 !important;
+  background-color: transparent !important;
+}
+
+.redaction-tabs-container .p-button-rounded.p-button-text:hover {
+  background-color: rgba(79, 70, 229, 0.1) !important;
+}
+
+/* Focus states */
+.redaction-tabs-container .p-button:focus,
+.redaction-tabs-container .button:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(79, 70, 229, 0.5) !important;
+}
+
+/* Fix the text input container */
+.grid.bg-black {
+  background-color: transparent !important;
+}
+
+/* Redaction container theme styles */
+.redaction-tabs-container {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+}
+
+/* Upload area theme */
+.custom-upload .p-fileupload-content {
+  background-color: var(--surface-b) !important;
+  border: 2px dashed var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.upload-placeholder {
+  color: var(--text-color) !important;
+}
+
+.upload-placeholder .text-gray-500 {
+  color: var(--credits-text) !important;
+}
+
+/* Card themes in redaction container */
+.redaction-tabs-container .p-card {
+  background-color: var(--surface-b) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.redaction-tabs-container .p-card .p-card-title {
+  color: var(--text-color) !important;
+}
+
+.redaction-tabs-container .p-card .p-card-content {
+  color: var(--text-color) !important;
+}
+
+/* Chip styles */
+.redaction-tabs-container .p-chip {
+  background-color: var(--surface-c) !important;
+  color: var(--text-color) !important;
+}
+
+/* Text redaction area */
+.redaction-tabs-container .redacted-text {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Textarea theme */
+.redaction-tabs-container .p-textarea {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.redaction-tabs-container .p-textarea::placeholder {
+  color: var(--credits-text) !important;
+}
+
+/* Global container rounded corners */
+.card,
+.p-card,
+.p-tabview,
+.p-datatable,
+.p-fileupload,
+.p-textarea,
+.p-inputtext,
+.redaction-tabs-container,
+.custom-upload .p-fileupload-content,
+.redacted-text,
+.p-button,
+.button,
+.p-chip {
+  border-radius: 12px !important;
+}
+
+/* Nested elements with smaller radius */
+.p-tabview .p-tabview-nav li .p-tabview-nav-link,
+.p-datatable .p-datatable-header,
+.p-datatable .p-datatable-thead > tr > th:first-child,
+.p-datatable .p-datatable-tbody > tr > td:first-child {
+  border-top-left-radius: 8px !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th:last-child,
+.p-datatable .p-datatable-tbody > tr > td:last-child {
+  border-top-right-radius: 8px !important;
+}
+
+/* Round specific corners for tab panels */
+.p-tabview .p-tabview-panels {
+  border-bottom-left-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+}
+
+/* Ensure upload area maintains rounded corners */
+.custom-upload .p-fileupload-content {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Round corners for buttons */
+.p-button-rounded {
+  border-radius: 50% !important;
+}
+
+/* Stat cards rounded corners */
+.stat-card {
+  border-radius: 16px !important;
+}
+
+/* Input fields rounded corners */
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+  border-radius: 8px !important;
+}
+
+/* Login page styles */
+#login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+#login form {
+  background-color: var(--surface-a) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  padding: 2.5rem !important;
+  width: 100% !important;
+  max-width: 450px !important; /* Increased from default */
+  margin: 0 auto !important;
+}
+
+#login img {
+  display: block;
+  margin: 0 auto 1.5rem;
+  max-width: 200px;
+  height: auto;
+}
+
+#login h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  #login {
+    padding: 1rem;
+  }
+  
+  #login form {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Login page button and input styles */
+#login input[type="text"],
+#login input[type="password"] {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  margin-bottom: 1rem !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
+}
+
+#login input[type="text"]:focus,
+#login input[type="password"]:focus {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2) !important;
+}
+
+/* Login button styles */
+#login input[type="submit"],
+#login .button,
+#login .button--block {
+  background-color: #4f46e5 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-weight: 500 !important;
+  transition: background-color 0.3s ease !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  margin-top: 1rem !important;
+}
+
+#login input[type="submit"]:hover,
+#login .button:hover,
+#login .button--block:hover {
+  background-color: #4338ca !important;
+}
+
+#login input[type="submit"]:focus,
+#login .button:focus,
+#login .button--block:focus {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(79, 70, 229, 0.5) !important;
+}
+
+/* Create account/login link style */
+#login p {
+  color: var(--text-color) !important;
+  cursor: pointer !important;
+  margin-top: 1rem !important;
+  text-align: center !important;
+  transition: color 0.3s ease !important;
+}
+
+#login p:hover {
+  color: var(--primary-color) !important;
+  text-decoration: underline !important;
+}
+
+/* Error message style */
+#login .wrong {
+  background-color: #fee2e2 !important;
+  color: #dc2626 !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  margin-bottom: 1rem !important;
+  font-size: 0.875rem !important;
+}
+
+/* TabView theme overrides */
+.p-tabview {
+  background-color: var(--surface-a) !important;
+}
+
+/* Tab headers */
+.p-tabview .p-tabview-nav {
+  background-color: var(--surface-b) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Individual tab header */
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Active tab */
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: var(--surface-a) !important;
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+/* Hover state for tabs */
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background-color: var(--surface-c) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Tab content panel */
+.p-tabview .p-tabview-panels {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+  padding: 1.5rem !important;
+}
+
+.p-tabview-panel {
+  background-color: var(--surface-a) !important;
+  color: var(--text-color) !important;
+}
+
+/* Tab panel content */
+.p-tabview-panel .p-card {
+  background-color: var(--surface-b) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Card title in tabs */
+.p-tabview-panel .p-card .p-card-title {
+  color: var(--text-color) !important;
+}
+
+/* Card content in tabs */
+.p-tabview-panel .p-card .p-card-content {
+  color: var(--text-color) !important;
+}
+
+/* Keep table corners sharp */
+.p-datatable,
+.p-datatable-header,
+.p-datatable-thead > tr > th,
+.p-datatable-tbody > tr > td,
+.p-datatable-footer,
+.p-datatable-wrapper,
+.p-datatable-table,
+.p-datatable .p-datatable-thead > tr > th:first-child,
+.p-datatable .p-datatable-thead > tr > th:last-child,
+.p-datatable .p-datatable-tbody > tr > td:first-child,
+.p-datatable .p-datatable-tbody > tr > td:last-child {
+  border-radius: 0 !important;
+}
+
+/* Add rounded corners only to the card container */
+.card.table-container {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background-color: var(--surface-a);
+}
+
+/* Ensure inner table stays sharp */
+.table-container .p-datatable {
+  border-radius: 0 !important;
+}
+
+/* Add or update these styles */
+.p-dropdown-panel {
+  background: var(--surface-a) !important;
+  border: 1px solid var(--surface-border) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items {
+  padding: 0.5rem 0 !important;
+  background: var(--surface-a) !important;
+}
+
+.p-dropdown-panel .p-dropdown-item {
+  margin: 0 !important;
+  padding: 0.75rem 1.25rem !important;
+  color: var(--text-color) !important;
+  background: var(--surface-a) !important;
+}
+
+.p-dropdown-panel .p-dropdown-item:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-color) !important;
+}
+
+.p-dropdown-panel .p-dropdown-item.p-highlight {
+  background: var(--surface-hover) !important;
+  color: var(--text-color) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.75rem 1.25rem !important;
+  color: var(--text-color) !important;
+  background: var(--surface-a) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-color) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight {
+  background: var(--surface-hover) !important;
+  color: var(--text-color) !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item .p-checkbox {
+  display: none !important;
+}
+
+/* Selected value in dropdown */
+.p-dropdown .p-dropdown-label {
+  color: var(--text-color) !important;
+  background: var(--surface-a) !important;
+}
