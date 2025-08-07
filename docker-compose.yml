@@ -1,0 +1,245 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: piisafe-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: TCET2
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - piisafe-network
+
+  # Translation API (backend1)
+  translation-api:
+    build:
+      context: ./backend1
+      dockerfile: Dockerfile
+    container_name: piisafe-translation-api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/
+      - AUTHORIZATION_TOKEN=${AUTHORIZATION_TOKEN}
+      - DEFAULT_SERVICE_ID=${DEFAULT_SERVICE_ID}
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend1:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+  # Dashboard API (backend2)
+  dashboard-api:
+    build:
+      context: ./backend2
+      dockerfile: Dockerfile
+    container_name: piisafe-dashboard-api
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=dashboard.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend2:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+  # Guardian Engine (PII Detection)
+  guardian-engine:
+    build:
+      context: ./Backend/guardian-engine
+      dockerfile: Dockerfile
+    container_name: piisafe-guardian-engine
+    restart: unless-stopped
+    ports:
+      - "5002:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/
+    depends_on:
+      - mongodb
+    volumes:
+      - ./Backend/guardian-engine:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+  # React Frontend
+  react-frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: piisafe-react-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000
+      - REACT_APP_DASHBOARD_API_URL=http://localhost:5001
+      - REACT_APP_GUARDIAN_API_URL=http://localhost:5002
+    depends_on:
+      - translation-api
+      - dashboard-api
+      - guardian-engine
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - piisafe-network
+
+  # Vue.js Frontend (File Browser)
+  vue-frontend:
+    build:
+      context: ./vue-frontend
+      dockerfile: Dockerfile
+    container_name: piisafe-vue-frontend
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    environment:
+      - VUE_APP_API_URL=http://localhost:5002
+    depends_on:
+      - guardian-engine
+    volumes:
+      - ./vue-frontend:/app
+      - /app/node_modules
+      - file_storage:/app/public/uploads
+    networks:
+      - piisafe-network
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: piisafe-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - react-frontend
+      - vue-frontend
+      - translation-api
+      - dashboard-api
+      - guardian-engine
+    networks:
+      - piisafe-network
+
+  # Redis Cache (Optional)
+  redis:
+    image: redis:7-alpine
+    container_name: piisafe-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - piisafe-network
+
+  # Anushka Microservices
+  # Gmail Authentication Service
+  gmail-auth-service:
+    build:
+      context: ./anushka
+      dockerfile: Dockerfile
+    container_name: anushka-gmail-auth
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
+    depends_on:
+      - mongodb
+    volumes:
+      - ./anushka:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+  # Task Management Service
+  task-service:
+    build:
+      context: ./anushka
+      dockerfile: Dockerfile
+    container_name: anushka-task-service
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app2.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/
+    depends_on:
+      - mongodb
+    volumes:
+      - ./anushka:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+  # Learning Analytics Service
+  analytics-service:
+    build:
+      context: ./anushka
+      dockerfile: Dockerfile
+    container_name: anushka-analytics-service
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app3.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=mongodb://admin:password123@mongodb:27017/
+    depends_on:
+      - mongodb
+    volumes:
+      - ./anushka:/app
+      - /app/__pycache__
+    networks:
+      - piisafe-network
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  file_storage:
+    driver: local
+
+networks:
+  piisafe-network:
+    driver: bridge

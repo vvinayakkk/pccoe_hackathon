@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Gmail Authentication Service
+  gmail-auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anushka-gmail-auth
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - COMPOSIO_API_KEY=${COMPOSIO_API_KEY}
+    volumes:
+      - ./app.py:/app/app.py
+      - /app/__pycache__
+    networks:
+      - anushka-network
+
+  # Task Management Service
+  task-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anushka-task-service
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app2.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=${MONGO_URI}
+    volumes:
+      - ./app2.py:/app/app2.py
+      - /app/__pycache__
+    networks:
+      - anushka-network
+
+  # Learning Analytics Service
+  analytics-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: anushka-analytics-service
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app3.py
+      - FLASK_DEBUG=1
+      - MONGO_URI=${MONGO_URI}
+    volumes:
+      - ./app3.py:/app/app3.py
+      - /app/__pycache__
+    networks:
+      - anushka-network
+
+networks:
+  anushka-network:
+    driver: bridge
