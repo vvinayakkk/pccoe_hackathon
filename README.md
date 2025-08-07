@@ -1,49 +1,105 @@
 # PIISAFE - Privacy-Preserving AI Communication Platform
 
-A fullstack web application that provides secure, privacy-preserving communication with AI assistance, featuring multi-language translation, offline capabilities, and comprehensive dashboard analytics.
+A comprehensive fullstack web application that provides secure, privacy-preserving communication with AI assistance, featuring multi-language translation, offline capabilities, comprehensive dashboard analytics, and advanced privacy protection through PII detection and anonymization.
 
-## 🚀 Technology Stack
+## 🎯 Problem Statement
 
-### Frontend
-- **React 19** with Vite for fast development
-- **Vue.js 3** with TypeScript for file management interface
-- **Tailwind CSS** for styling
-- **Framer Motion** for animations
-- **React Router** for navigation
-- **Axios** for API communication
+**Solving Challenges in AI Communication via Technology**
 
-### Backend
-- **Flask** with Python 3.11+
-- **Flask-CORS** for cross-origin requests
-- **PyMongo** for MongoDB integration
-- **python-dotenv** for environment management
+The modern digital landscape faces critical challenges in AI-assisted communication:
 
-### Infrastructure
-- **Docker** for containerization
-- **MongoDB** for data persistence
-- **Nginx** for production serving
+- **Privacy Concerns**: Sensitive personal information (PII) is often exposed during AI interactions
+- **Language Barriers**: Limited access to AI services in regional languages
+- **Data Security**: Lack of robust privacy protection mechanisms in AI communication platforms
+- **User Experience**: Complex interfaces that don't prioritize privacy and accessibility
+- **Offline Accessibility**: Limited functionality when internet connectivity is poor
+
+PIISAFE addresses these challenges by providing a secure, multilingual AI communication platform with built-in privacy protection, real-time translation, and comprehensive analytics.
+
+## ✨ Features
+
+### 🔒 Privacy & Security
+- **PII Detection & Anonymization**: Real-time detection and masking of sensitive information
+- **Guardian Engine Integration**: Advanced privacy protection using Microsoft Presidio
+- **Secure Communication**: End-to-end encryption for all data transmissions
+- **Privacy Dashboard**: Comprehensive analytics on data protection metrics
+
+### 🌐 Multi-Language Support
+- **Real-time Translation**: Support for 22+ Indian languages via Bhashini API
+- **Offline Capabilities**: Basic translation features without internet connectivity
+- **Language Analytics**: Track usage patterns and translation accuracy
+- **Regional Language Support**: Native support for Hindi, Marathi, Gujarati, and more
+
+### 📊 Analytics & Dashboard
+- **Communication Analytics**: Track translation usage and patterns
+- **Performance Metrics**: Monitor system performance and user engagement
+- **Learning Analytics**: AI-powered insights into communication patterns
+- **Real-time Monitoring**: Live dashboard with key performance indicators
+
+### 🎨 User Experience
+- **Modern UI/UX**: React-based responsive interface with Tailwind CSS
+- **File Management**: Vue.js powered file browser with advanced features
+- **Mobile Responsive**: Optimized for all device sizes
+- **Accessibility**: WCAG compliant design for inclusive access
+
+### 🔧 Technical Features
+- **Microservices Architecture**: Scalable, maintainable service-oriented design
+- **Docker Containerization**: Easy deployment and scaling
+- **MongoDB Integration**: Robust data persistence and analytics
+- **API-First Design**: RESTful APIs for seamless integration
+
+## 🛠️ Technology Stack
+
+### Frontend Technologies
+- **React 19** with Vite - Main application interface
+- **Vue.js 3** with TypeScript - File management interface
+- **Tailwind CSS 4.0** - Modern styling framework
+- **Framer Motion** - Smooth animations and transitions
+- **React Router DOM** - Client-side routing
+- **Axios** - HTTP client for API communication
+- **Recharts** - Data visualization components
+- **Three.js** - 3D graphics and visualizations
+
+### Backend Technologies
+- **Flask 3.0** - Python web framework for APIs
+- **Flask-CORS** - Cross-origin resource sharing
+- **PyMongo** - MongoDB Python driver
+- **python-dotenv** - Environment variable management
+- **Composio** - API integration framework
+
+### Infrastructure & DevOps
+- **Docker & Docker Compose** - Containerization and orchestration
+- **MongoDB 7.0** - NoSQL database
+- **Nginx** - Reverse proxy and load balancer
+- **Redis** - Caching layer
+- **Node.js 18+** - JavaScript runtime
+
+### External Services
+- **Bhashini API** - Government translation services
+- **Google OAuth** - Authentication services
+- **Microsoft Presidio** - PII detection and anonymization
 
 ## 📁 Project Structure
 
 ```
 pccoe_hackathon/
-├── client/                 # React frontend (main app)
+├── client/                 # React frontend (Port: 3000)
 │   ├── src/
 │   │   ├── components/    # React components
 │   │   ├── pages/        # Page components
 │   │   └── styles/       # CSS styles
 │   ├── package.json
 │   └── vite.config.js
-├── vue-frontend/          # Vue.js file browser interface
+├── vue-frontend/          # Vue.js file browser (Port: 3001)
 │   ├── src/
 │   │   ├── components/   # Vue components
 │   │   ├── views/        # Vue pages
 │   │   └── stores/       # Pinia stores
 │   └── package.json
-├── backend1/              # Translation API service
+├── backend1/              # Translation API (Port: 5000)
 │   ├── app.py            # Flask translation API
 │   └── requirements.txt
-├── backend2/              # Dashboard & Analytics API
+├── backend2/              # Dashboard & Analytics API (Port: 5001)
 │   ├── dashboard.py      # Flask dashboard API
 │   └── requirements.txt
 ├── Backend/              # Guardian Engine (PII detection)
@@ -54,73 +110,106 @@ pccoe_hackathon/
 │   ├── app3.py          # Learning Analytics Service (Port: 3002)
 │   └── requirements.txt
 ├── Filebrowser/          # File management service
+├── nginx/                # Nginx configuration
 └── docker-compose.yml    # Multi-service orchestration
 ```
 
-## 🛠️ Local Setup Instructions
+## 🚀 Setup Instructions
 
-### Prerequisites
-- Node.js 18+ and npm
-- Python 3.11+
-- MongoDB (local or cloud)
-- Docker and Docker Compose
-
-### Frontend Setup (React)
+### Method 1: Manual Setup (Bash Script)
 
 ```bash
-# Navigate to React frontend
+#!/bin/bash
+# setup.sh - Manual setup script
+
+echo "🚀 Setting up PIISAFE Platform..."
+
+# Clone repository (if not already done)
+# git clone <repository-url>
+# cd pccoe_hackathon
+
+# Install Node.js dependencies
+echo "📦 Installing React dependencies..."
 cd client
-
-# Install dependencies
 npm install
+cd ..
 
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Frontend Setup (Vue.js)
-
-```bash
-# Navigate to Vue frontend
+echo "📦 Installing Vue.js dependencies..."
 cd vue-frontend
-
-# Install dependencies
 npm install
+cd ..
 
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-```
-
-### Backend Setup
-
-```bash
-# Navigate to backend directory
-cd backend1  # or backend2
-
-# Create virtual environment
+# Install Python dependencies
+echo "🐍 Installing Python dependencies..."
+cd backend1
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
+cd ..
 
-# Set environment variables
-cp .env.example .env
+cd backend2
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd ..
+
+cd anushka
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cd ..
+
+# Setup environment variables
+echo "🔧 Setting up environment variables..."
+cp env.example .env
 # Edit .env with your configuration
 
-# Run Flask development server
-python app.py  # or dashboard.py for backend2
+# Start MongoDB (if not using Docker)
+echo "🗄️ Starting MongoDB..."
+# mongod --dbpath ./data/db &
+
+# Start services
+echo "🚀 Starting all services..."
+
+# Start backend services
+cd backend1
+python app.py &
+cd ../backend2
+python dashboard.py &
+cd ../anushka
+python app.py &
+python app2.py &
+python app3.py &
+cd ..
+
+# Start frontend services
+cd client
+npm run dev &
+cd ../vue-frontend
+npm run dev &
+
+echo "✅ PIISAFE Platform is running!"
+echo "🌐 React App: http://localhost:3000"
+echo "📁 Vue App: http://localhost:3001"
+echo "🔧 Translation API: http://localhost:5000"
+echo "📊 Dashboard API: http://localhost:5001"
 ```
 
-### Docker Setup
+### Method 2: Docker Compose Setup
 
 ```bash
+# Prerequisites
+# - Docker and Docker Compose installed
+# - Git repository cloned
+
+# Clone and navigate to project
+git clone <repository-url>
+cd pccoe_hackathon
+
+# Create environment file
+cp env.example .env
+# Edit .env with your configuration
+
 # Build and start all services
 docker-compose up --build
 
@@ -132,384 +221,560 @@ docker-compose logs -f
 
 # Stop services
 docker-compose down
+
+# Clean up volumes (if needed)
+docker-compose down -v
 ```
 
 ## 🔧 Environment Variables
 
-Create a `.env` file in each backend directory:
+Create a `.env` file in the root directory:
 
 ```bash
-# .env.example
-FLASK_ENV=development
-FLASK_APP=app.py
-FLASK_DEBUG=1
-
 # API Configuration
 REACT_APP_API_URL=http://localhost:5000
-REACT_APP_VUE_API_URL=http://localhost:3000
+REACT_APP_DASHBOARD_API_URL=http://localhost:5001
+REACT_APP_GUARDIAN_API_URL=http://localhost:5002
+VUE_APP_API_URL=http://localhost:5002
 
-# Database
-MONGO_URI=mongodb://localhost:27017/
+# Database Configuration
+MONGO_URI=mongodb://admin:password123@localhost:27017/
 DATABASE_NAME=TCET2
 
 # Translation API (backend1)
 AUTHORIZATION_TOKEN=your_bhashini_token
 DEFAULT_SERVICE_ID=ai4bharat/indictrans--gpu-t4
+BHASHINI_API_URL=https://dhruva-api.bhashini.gov.in
 
 # Security
 SECRET_KEY=your_secret_key_here
 JWT_SECRET=your_jwt_secret_here
 
-# External Services
-BHASHINI_API_URL=https://dhruva-api.bhashini.gov.in
-```
+# Google OAuth (anushka services)
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+COMPOSIO_API_KEY=your_composio_api_key
 
-## 🐳 Docker Configuration
-
-### Dockerfile for Flask Backend
-
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY . .
-
-# Expose port
-EXPOSE 5000
-
-# Run the application
-CMD ["python", "app.py"]
-```
-
-### Dockerfile for React Frontend
-
-```dockerfile
-FROM node:18-alpine AS builder
-
-WORKDIR /app
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy source code
-COPY . .
-
-# Build the application
-RUN npm run build
-
-# Production stage
-FROM nginx:alpine
-
-# Copy built files
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port
-EXPOSE 80
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
-```
-
-## 📡 API Usage Examples
-
-### Translation API (backend1)
-
-```bash
-# Translate text
-curl -X POST http://localhost:5000/api/translate \
-  -H "Content-Type: application/json" \
-  -d '{
-    "source_language": "en",
-    "target_language": "hi",
-    "text": "Hello, how are you?",
-    "service_id": "ai4bharat/indictrans--gpu-t4"
-  }'
-
-# Response
-{
-  "translated_text": "नमस्ते, आप कैसे हैं?",
-  "source_language": "en",
-  "target_language": "hi",
-  "confidence": 0.95
-}
-```
-
-### Dashboard API (backend2)
-
-```bash
-# Get dashboard statistics
-curl -X GET http://localhost:5001/api/dashboard/stats
-
-# Get recent communications
-curl -X GET "http://localhost:5001/api/dashboard/recent-communications?limit=5"
-
-# Get language distribution
-curl -X GET http://localhost:5001/api/dashboard/language-distribution
-
-# Get user profile
-curl -X GET http://localhost:5001/api/user/profile
-```
-
-### Communication History
-
-```bash
-# Get communication history
-curl -X GET "http://localhost:5001/api/communications/history?page=1&limit=10"
-
-# Apply suggestion
-curl -X POST http://localhost:5001/api/dashboard/apply-suggestion \
-  -H "Content-Type: application/json" \
-  -d '{
-    "communication_id": "507f1f77bcf86cd799439011",
-    "suggestion": "improved_text_here"
-  }'
-```
-
-## 🚀 Deployment
-
-### DockerHub Deployment
-
-```bash
-# Build and tag images
-docker build -t your-username/piisafe-backend:latest ./backend1
-docker build -t your-username/piisafe-frontend:latest ./client
-
-# Push to DockerHub
-docker push your-username/piisafe-backend:latest
-docker push your-username/piisafe-frontend:latest
-```
-
-### Render Deployment
-
-1. Connect your GitHub repository
-2. Set environment variables in Render dashboard
-3. Configure build commands:
-   - **Backend**: `pip install -r requirements.txt && python app.py`
-   - **Frontend**: `npm install && npm run build`
-
-### Heroku Deployment
-
-```bash
-# Create Heroku app
-heroku create piisafe-app
-
-# Add MongoDB addon
-heroku addons:create mongolab:sandbox
-
-# Deploy
-git push heroku main
-
-# Set environment variables
-heroku config:set FLASK_ENV=production
-heroku config:set MONGO_URI=your_mongo_uri
+# Flask Configuration
+FLASK_ENV=development
+FLASK_DEBUG=1
 ```
 
 ## 📊 Architecture Diagrams
 
-### Folder Structure
-
-```mermaid
-graph TD
-    A[pccoe_hackathon] --> B[client]
-    A --> C[vue-frontend]
-    A --> D[backend1]
-    A --> E[backend2]
-    A --> F[Backend]
-    A --> G[Filebrowser]
-    
-    B --> B1[src/components]
-    B --> B2[src/pages]
-    B --> B3[src/styles]
-    
-    C --> C1[src/components]
-    C --> C2[src/views]
-    C --> C3[src/stores]
-    
-    D --> D1[app.py]
-    D --> D2[requirements.txt]
-    
-    E --> E1[dashboard.py]
-    E --> E2[requirements.txt]
-    
-    F --> F1[guardian-engine]
-    
-    G --> G1[filebrowser.db]
-```
-
-### Service Architecture
+### 1. System Architecture
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
+    subgraph "Client Layer"
         A[React App<br/>Port: 3000]
         B[Vue.js App<br/>Port: 3001]
+        C[Mobile App]
     end
     
-    subgraph "Backend Layer"
-        C[Translation API<br/>Port: 5000]
-        D[Dashboard API<br/>Port: 5001]
-        E[Guardian Engine<br/>Port: 5002]
+    subgraph "Load Balancer"
+        D[Nginx<br/>Port: 80/443]
+    end
+    
+    subgraph "API Gateway Layer"
+        E[API Gateway]
+    end
+    
+    subgraph "Microservices Layer"
+        F[Translation API<br/>Port: 5000]
+        G[Dashboard API<br/>Port: 5001]
+        H[Guardian Engine<br/>Port: 5002]
+        I[Gmail Auth Service<br/>Port: 3000]
+        J[Task Management<br/>Port: 3001]
+        K[Learning Analytics<br/>Port: 3002]
     end
     
     subgraph "Data Layer"
-        F[(MongoDB<br/>Port: 27017)]
-        G[File Storage]
+        L[(MongoDB<br/>Port: 27017)]
+        M[(Redis Cache<br/>Port: 6379)]
+        N[File Storage]
     end
     
     subgraph "External Services"
-        H[Bhashini API]
-        I[AI Services]
+        O[Bhashini API]
+        P[Google OAuth]
+        Q[Microsoft Presidio]
     end
     
-    A --> C
     A --> D
-    B --> E
-    C --> H
-    D --> F
+    B --> D
+    C --> D
+    D --> E
     E --> F
+    E --> G
+    E --> H
     E --> I
+    E --> J
+    E --> K
+    
+    F --> L
+    G --> L
+    H --> L
+    I --> L
+    J --> L
+    K --> L
+    
+    F --> M
+    G --> M
+    
+    F --> O
+    I --> P
+    H --> Q
 ```
 
-### Request-Response Flow
+### 2. API Flow (Frontend → Backend)
 
 ```mermaid
 sequenceDiagram
     participant U as User
     participant R as React App
+    participant V as Vue App
+    participant N as Nginx
     participant T as Translation API
-    participant B as Bhashini API
     participant D as Dashboard API
+    participant G as Guardian Engine
+    participant B as Bhashini API
     participant M as MongoDB
     
     U->>R: Enter text for translation
-    R->>T: POST /api/translate
-    T->>B: Forward translation request
+    R->>N: POST /api/translate
+    N->>T: Forward request
+    T->>G: Check for PII
+    G->>T: Return sanitized text
+    T->>B: Request translation
     B->>T: Return translated text
-    T->>R: Return translation result
-    R->>D: POST communication data
-    D->>M: Store communication record
-    D->>R: Confirm storage
-    R->>U: Display translated text
+    T->>M: Store communication
+    T->>N: Return response
+    N->>R: Display result
+    
+    U->>V: Upload file
+    V->>N: POST /api/files
+    N->>G: Process file for PII
+    G->>V: Return processed file
+    V->>M: Store file metadata
+    
+    U->>R: View dashboard
+    R->>N: GET /api/dashboard/stats
+    N->>D: Forward request
+    D->>M: Query analytics
+    M->>D: Return data
+    D->>N: Return response
+    N->>R: Display dashboard
 ```
 
-### Database ER Diagram
-
-```mermaid
-erDiagram
-    COMMUNICATIONS {
-        ObjectId _id
-        String original_text
-        String refined_text
-        String source_language
-        String target_language
-        Number ai_confidence_score
-        Array improvements_applied
-        Boolean offline_mode_used
-        DateTime timestamp
-        ObjectId user_id
-    }
-    
-    USERS {
-        ObjectId _id
-        String username
-        String email
-        String preferred_languages
-        DateTime created_at
-        DateTime last_login
-    }
-    
-    PERFORMANCE_METRICS {
-        ObjectId _id
-        Number accuracy_rate
-        Number improvement_rate
-        Number languages_supported
-        Number user_correction_rate
-        Number average_refinement_time
-        DateTime timestamp
-    }
-    
-    LANGUAGES {
-        ObjectId _id
-        String language_code
-        String language_name
-        Boolean is_active
-        DateTime created_at
-    }
-    
-    COMMUNICATIONS ||--o{ USERS : "belongs to"
-    PERFORMANCE_METRICS ||--o{ USERS : "tracks"
-    LANGUAGES ||--o{ COMMUNICATIONS : "supports"
-```
-
-### React Component Hierarchy
-
-```mermaid
-graph TD
-    A[App.jsx] --> B[Router]
-    B --> C[Home Page]
-    B --> D[Translation Page]
-    B --> E[Dashboard Page]
-    B --> F[Agent Learning Page]
-    
-    C --> C1[Features.jsx]
-    C --> C2[FeaturesCards.jsx]
-    C --> C3[Footer.jsx]
-    
-    D --> D1[Translation Form]
-    D --> D2[Language Selector]
-    D --> D3[Result Display]
-    
-    E --> E1[Stats Cards]
-    E --> E2[Charts]
-    E --> E3[Recent Communications]
-    
-    F --> F1[Learning Interface]
-    F --> F2[Progress Tracker]
-    
-    D1 --> D1a[Text Input]
-    D1 --> D1b[Submit Button]
-    
-    E1 --> E1a[Metric Card]
-    E1 --> E1b[Trend Indicator]
-```
-
-### Authentication Flow
+### 3. User Authentication State Machine
 
 ```mermaid
 stateDiagram-v2
     [*] --> Unauthenticated
-    Unauthenticated --> Login: User enters credentials
-    Login --> Validating: Submit form
+    
+    Unauthenticated --> Login: User clicks login
+    Login --> Validating: Submit credentials
     Validating --> Authenticated: Valid credentials
     Validating --> Login: Invalid credentials
-    Authenticated --> Dashboard: Redirect
-    Authenticated --> Translation: Navigate
+    Validating --> Error: Network error
+    
+    Authenticated --> Dashboard: Redirect after login
+    Authenticated --> Translation: Navigate to translation
+    Authenticated --> FileManager: Navigate to files
+    Authenticated --> Settings: Navigate to settings
+    
     Dashboard --> Authenticated: Stay logged in
     Translation --> Authenticated: Stay logged in
-    Authenticated --> Unauthenticated: Logout
-    Unauthenticated --> [*]
+    FileManager --> Authenticated: Stay logged in
+    Settings --> Authenticated: Stay logged in
+    
+    Authenticated --> Profile: View profile
+    Profile --> Authenticated: Return to previous
+    
+    Authenticated --> Logout: User clicks logout
+    Logout --> Unauthenticated: Clear session
+    
+    Error --> Login: Retry login
+    Error --> Unauthenticated: Return to start
+```
+
+### 4. Database ER Diagram
+
+```mermaid
+erDiagram
+    USERS {
+        ObjectId _id PK
+        String username
+        String email
+        String password_hash
+        Array preferred_languages
+        ObjectId profile_id FK
+        DateTime created_at
+        DateTime last_login
+        Boolean is_active
+        String role
+    }
+    
+    USER_PROFILES {
+        ObjectId _id PK
+        String full_name
+        String avatar_url
+        String phone_number
+        String timezone
+        ObjectId user_id FK
+        DateTime updated_at
+    }
+    
+    COMMUNICATIONS {
+        ObjectId _id PK
+        String original_text
+        String translated_text
+        String source_language
+        String target_language
+        Number confidence_score
+        Array pii_detected
+        Array improvements_applied
+        Boolean offline_mode_used
+        ObjectId user_id FK
+        DateTime timestamp
+        String session_id
+    }
+    
+    FILES {
+        ObjectId _id PK
+        String filename
+        String file_path
+        String file_type
+        Number file_size
+        String checksum
+        Array pii_detected
+        String processed_content
+        ObjectId user_id FK
+        DateTime uploaded_at
+        DateTime processed_at
+    }
+    
+    ANALYTICS {
+        ObjectId _id PK
+        String metric_name
+        Number metric_value
+        String metric_unit
+        ObjectId user_id FK
+        DateTime timestamp
+        String category
+    }
+    
+    TASKS {
+        ObjectId _id PK
+        String title
+        String description
+        String status
+        String priority
+        ObjectId assigned_to FK
+        ObjectId created_by FK
+        DateTime due_date
+        DateTime created_at
+        DateTime updated_at
+    }
+    
+    LEARNING_SESSIONS {
+        ObjectId _id PK
+        ObjectId user_id FK
+        String session_type
+        Number duration_minutes
+        Number accuracy_score
+        Array exercises_completed
+        DateTime started_at
+        DateTime completed_at
+    }
+    
+    USERS ||--o{ USER_PROFILES : "has"
+    USERS ||--o{ COMMUNICATIONS : "creates"
+    USERS ||--o{ FILES : "uploads"
+    USERS ||--o{ ANALYTICS : "generates"
+    USERS ||--o{ TASKS : "assigned"
+    USERS ||--o{ LEARNING_SESSIONS : "participates"
+```
+
+### 5. Deployment Flow (Local/Dev/Prod)
+
+```mermaid
+graph TD
+    subgraph "Development Environment"
+        A[Local Development]
+        B[Code Changes]
+        C[Local Testing]
+        D[Git Commit]
+    end
+    
+    subgraph "Staging Environment"
+        E[Git Push to Dev Branch]
+        F[Automated Tests]
+        G[Staging Deployment]
+        H[Integration Testing]
+    end
+    
+    subgraph "Production Environment"
+        I[Git Push to Main Branch]
+        J[Production Tests]
+        K[Blue-Green Deployment]
+        L[Production Monitoring]
+    end
+    
+    subgraph "Infrastructure"
+        M[Docker Build]
+        N[Container Registry]
+        O[Load Balancer]
+        P[Auto Scaling]
+    end
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    
+    E --> M
+    M --> N
+    N --> G
+    G --> O
+    O --> P
+```
+
+### 6. Microservice Communication
+
+```mermaid
+graph LR
+    subgraph "API Gateway"
+        A[Gateway Service]
+    end
+    
+    subgraph "Core Services"
+        B[Translation Service]
+        C[Dashboard Service]
+        D[Guardian Service]
+    end
+    
+    subgraph "Integration Services"
+        E[Gmail Auth Service]
+        F[Task Management Service]
+        G[Learning Analytics Service]
+    end
+    
+    subgraph "External APIs"
+        H[Bhashini API]
+        I[Google OAuth]
+        J[Microsoft Presidio]
+    end
+    
+    subgraph "Data Stores"
+        K[(MongoDB)]
+        L[(Redis Cache)]
+        M[File Storage]
+    end
+    
+    A --> B
+    A --> C
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    
+    B --> H
+    B --> K
+    B --> L
+    
+    C --> K
+    C --> L
+    
+    D --> J
+    D --> K
+    
+    E --> I
+    E --> K
+    
+    F --> K
+    F --> L
+    
+    G --> K
+    G --> L
+    
+    B -.->|Event| C
+    C -.->|Event| G
+    D -.->|Event| C
+```
+
+### 7. CI/CD Pipeline Overview
+
+```mermaid
+graph TD
+    subgraph "Source Control"
+        A[Git Repository]
+        B[Feature Branch]
+        C[Pull Request]
+    end
+    
+    subgraph "CI Pipeline"
+        D[Code Push]
+        E[Lint & Format]
+        F[Unit Tests]
+        G[Integration Tests]
+        H[Security Scan]
+        I[Build Docker Images]
+    end
+    
+    subgraph "CD Pipeline"
+        J[Deploy to Staging]
+        K[Automated Testing]
+        L[Manual Review]
+        M[Deploy to Production]
+        N[Health Checks]
+        O[Rollback if needed]
+    end
+    
+    subgraph "Monitoring"
+        P[Application Monitoring]
+        Q[Infrastructure Monitoring]
+        R[Error Tracking]
+        S[Performance Metrics]
+    end
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    M --> N
+    N --> O
+    
+    M --> P
+    M --> Q
+    P --> R
+    Q --> S
+```
+
+## 🚀 Quick Start
+
+### Using Docker Compose (Recommended)
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd pccoe_hackathon
+
+# Copy environment file
+cp env.example .env
+
+# Edit environment variables
+nano .env
+
+# Start all services
+docker-compose up --build
+
+# Access the application
+# React App: http://localhost:3000
+# Vue App: http://localhost:3001
+# API Docs: http://localhost:5000/docs
+```
+
+### Manual Setup
+
+```bash
+# Install dependencies
+cd client && npm install && cd ..
+cd vue-frontend && npm install && cd ..
+cd backend1 && pip install -r requirements.txt && cd ..
+cd backend2 && pip install -r requirements.txt && cd ..
+cd anushka && pip install -r requirements.txt && cd ..
+
+# Start services
+# Terminal 1: React app
+cd client && npm run dev
+
+# Terminal 2: Vue app
+cd vue-frontend && npm run dev
+
+# Terminal 3: Translation API
+cd backend1 && python app.py
+
+# Terminal 4: Dashboard API
+cd backend2 && python dashboard.py
+
+# Terminal 5: Microservices
+cd anushka && python app.py
+cd anushka && python app2.py
+cd anushka && python app3.py
+```
+
+## 📡 API Documentation
+
+### Translation API Endpoints
+
+```bash
+# Translate text
+POST /api/translate
+{
+  "source_language": "en",
+  "target_language": "hi",
+  "text": "Hello, how are you?",
+  "service_id": "ai4bharat/indictrans--gpu-t4"
+}
+
+# Get supported languages
+GET /api/languages
+
+# Get translation history
+GET /api/translations/history?page=1&limit=10
+```
+
+### Dashboard API Endpoints
+
+```bash
+# Get dashboard statistics
+GET /api/dashboard/stats
+
+# Get recent communications
+GET /api/dashboard/recent-communications?limit=5
+
+# Get language distribution
+GET /api/dashboard/language-distribution
+
+# Get user profile
+GET /api/user/profile
+```
+
+### Guardian Engine Endpoints
+
+```bash
+# Analyze text for PII
+POST /api/analyze
+{
+  "text": "My name is John Doe and my email is john@example.com"
+}
+
+# Anonymize text
+POST /api/anonymize
+{
+  "text": "Contact John Doe at john@example.com",
+  "entities": ["PERSON", "EMAIL"]
+}
 ```
 
 ## 🤝 Contributing
-
-### Development Setup
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
@@ -517,28 +782,13 @@ stateDiagram-v2
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-### Code Style
+### Development Guidelines
 
-- **Python**: Follow PEP 8 guidelines
-- **JavaScript/React**: Use ESLint and Prettier
-- **Vue.js**: Follow Vue.js style guide
-- **CSS**: Use Tailwind CSS classes
-
-### Testing
-
-```bash
-# Backend tests
-cd backend1
-python -m pytest
-
-# Frontend tests
-cd client
-npm test
-
-# Vue tests
-cd vue-frontend
-npm run test
-```
+- Follow PEP 8 for Python code
+- Use ESLint and Prettier for JavaScript/React
+- Follow Vue.js style guide for Vue components
+- Write comprehensive tests for new features
+- Update documentation for API changes
 
 ## 📄 License
 
@@ -547,9 +797,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Bhashini API** for translation services
-- **Guardian Engine** for privacy protection
+- **Microsoft Presidio** for privacy protection
 - **MongoDB** for data persistence
 - **React** and **Vue.js** communities
+- **Tailwind CSS** for styling framework
 
 ## 📞 Support
 
@@ -560,4 +811,4 @@ For support and questions:
 
 ---
 
-**PIISAFE** - Making AI communication safe, secure, and accessible for everyone.
+**PIISAFE** - Making AI communication safe, secure, and accessible for everyone. 🚀
