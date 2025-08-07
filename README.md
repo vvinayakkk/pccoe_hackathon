@@ -2,6 +2,9 @@
 
 A comprehensive fullstack web application that provides secure, privacy-preserving communication with AI assistance, featuring multi-language translation, offline capabilities, comprehensive dashboard analytics, and advanced privacy protection through PII detection and anonymization.
 
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/033570d3-30c7-4cb8-9ba0-686653a07e46" />
+
 ## 🎯 Problem Statement
 
 **Solving Challenges in AI Communication via Technology**
